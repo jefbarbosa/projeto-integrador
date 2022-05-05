@@ -16,6 +16,7 @@ import lombok.Getter;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -36,6 +37,8 @@ public class CartDTO {
     @NotNull(message = "Items missing.")
     private List<@Valid ItemDTO> items;
 
+    private BigDecimal totalValue;
+
     public static Cart map(CartDTO cartDTO, CustomerService customerService, AdvertisementService advertisementService) {
         Customer customer = customerService.findById(cartDTO.getCustomerId());
         List<Item> items = cartDTO.getItems().stream().map(item -> ItemDTO.map(item, advertisementService)).collect(Collectors.toList());
@@ -46,5 +49,15 @@ public class CartDTO {
                 .orderStatus(cartDTO.getOrderStatus())
                 .items(items)
                 .build();
+    }
+
+    public CartDTO(LocalDate orderDate, OrderStatus orderStatus, BigDecimal totalValue) {
+        this.orderDate = orderDate;
+        this.orderStatus = orderStatus;
+        this.totalValue = totalValue;
+    }
+
+    public static CartDTO basicInfo(Cart cart) {
+        return new CartDTO(cart.getOrderDate(), cart.getOrderStatus(), cart.getTotalCart());
     }
 }
