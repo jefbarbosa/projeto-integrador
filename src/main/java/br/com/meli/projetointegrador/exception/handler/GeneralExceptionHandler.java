@@ -132,4 +132,16 @@ public class GeneralExceptionHandler {
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(UserHasNoPurchaseException.class)
+    protected ResponseEntity<ErrorDTO> handleUserHasNoPurchaseException(UserHasNoPurchaseException ex){
+        ErrorDTO error = new ErrorDTO("UserHasNoPurchaseException",  ex.getMessage());
+        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(UserHasNoOrder.class)
+    protected ResponseEntity<ErrorDTO> handleUserHasNoOrder(UserHasNoOrder ex){
+        ErrorDTO error = new ErrorDTO("UserHasNoOrder",  ex.getMessage());
+        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+    }
+
 }
