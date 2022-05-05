@@ -9,6 +9,10 @@ import br.com.meli.projetointegrador.repository.BankSlipRepository;
 import br.com.meli.projetointegrador.repository.CartRepository;
 import br.com.meli.projetointegrador.repository.CustomerRepository;
 import br.com.meli.projetointegrador.security.services.UserDetailsImpl;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.client.j2se.MatrixToImageWriter;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.QRCodeWriter;
 import com.openhtmltopdf.pdfboxout.PdfRendererBuilder;
 import lombok.AllArgsConstructor;
 import net.sourceforge.barbecue.Barcode;
@@ -45,6 +49,7 @@ public class BankSlipService {
     private static final String PDF = "src/main/resources/bankslip_tmp.pdf";
     private static final int SLIP_FINAL_PART_LENGTH = 10;
     private static final Font BARCODE_TEXT_FONT = new Font(Font.SANS_SERIF, Font.PLAIN, 14);
+    private static final String originalBankSlipCode = "34591.12345 12345.691112 12022.370008 8";
 
     private BankSlipRepository bankSlipRepository;
     private CustomerRepository customerRepository;
@@ -129,32 +134,42 @@ public class BankSlipService {
         LocalDate processingDate = LocalDate.parse(date);
         LocalDate baseDate = LocalDate.of(1997, 7, 10);
         long daysElapsed = ChronoUnit.DAYS.between(baseDate, processingDate);
-        String daysELapsedStr = String.valueOf(daysElapsed);
+        String daysElapsedStr = String.valueOf(daysElapsed);
 
         DecimalFormat decimalFormat = new DecimalFormat("#.00");
-        String textBankSlipValue = decimalFormat.format(value).replace(".", "");
+        String textBankSlipValue = decimalFormat.format(value).replace(".", "").replace(",", "");
 
         String formattedValue = String.format("%1$" + SLIP_FINAL_PART_LENGTH + "s", textBankSlipValue)
                 .replace(' ', '0');
 
-        return initialValue + " " + daysELapsedStr + formattedValue;
+        return initialValue + " " + daysElapsedStr + formattedValue;
 
     }
 
-//    public String createBarcodeB64(String originalCodeB64, String barcode) {
-//
-//    }
+    public BufferedImage generateQRcodeB64(Long orderId) throws Exception {
 
-//    public BufferedImage generateEAN13BarcodeImage(String barcodeText) throws Exception {
-//        Barcode barcode = BarcodeFactory.createCode128(barcodeText);
-//        barcode.setFont(BARCODE_TEXT_FONT);
-////        barcode.toString();
-//        BufferedImage bufImg = BarcodeImageHandler.getImage(barcode);
-//
-//        Base64.getEncoder().encodeToString(barcode.toString().getBytes(StandardCharsets.UTF_8));
-//
-//        return BarcodeImageHandler.getImage(barcode);
-//    }
+        BankSlipResult bankSlipResult = new BankSlipResultImpl();
+        bankSlipResult = getBankSlip(orderId);
+        String bankSlipCode = createBankSlipCode(originalBankSlipCode, bankSlipResult.getDate(), bankSlipResult.getTotal());
+
+        QRCodeWriter barcodeWriter = new QRCodeWriter();
+        BitMatrix bitMatrix = barcodeWriter.encode(bankSlipCode, BarcodeFormat.QR_CODE, 200, 200);
+
+        return MatrixToImageWriter.toBufferedImage(bitMatrix);
+    }
+
+
+    public BufferedImage generateBarcodeB64(Long orderId) throws Exception {
+
+        BankSlipResult bankSlipResult = new BankSlipResultImpl();
+        bankSlipResult = getBankSlip(orderId);
+        String bankSlipCode = createBankSlipCode(originalBankSlipCode, bankSlipResult.getDate(), bankSlipResult.getTotal());
+
+        Barcode barcode = BarcodeFactory.createCode128(bankSlipCode);
+        barcode.setFont(BARCODE_TEXT_FONT);
+
+        return BarcodeImageHandler.getImage(barcode);
+    }
 
     public String generateBarcodeB64String(String barcodeText) throws Exception {
         Barcode barcode = BarcodeFactory.createCode128(barcodeText);
@@ -194,8 +209,7 @@ public class BankSlipService {
         replaceHtmlInputs(doc, "div#buyerCpfCnpj", bankSlipResult.getCpf());
         replaceHtmlInputs(doc, "div#buyerEmail", bankSlipResult.getEmail());
 
-        doc.outputSettings()
-                .syntax(Document.OutputSettings.Syntax.xml);
+        doc.outputSettings().syntax(Document.OutputSettings.Syntax.xml);
         return doc;
     }
 

@@ -3,12 +3,10 @@ package br.com.meli.projetointegrador.controller;
 
 import br.com.meli.projetointegrador.dto.BankSlipResult;
 import br.com.meli.projetointegrador.dto.CartDTO;
-import br.com.meli.projetointegrador.model.BankSlip;
 import br.com.meli.projetointegrador.model.Cart;
 import br.com.meli.projetointegrador.service.BankSlipService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -21,11 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.xml.transform.TransformerException;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -33,8 +27,15 @@ import java.util.stream.Collectors;
 @RequestMapping("/api/v1/fresh-products/bank-slip")
 public class BankSlipController {
 
+    private final String boletoName = "boleto.pdf";
+
     @Autowired
     private BankSlipService bankSlipService;
+
+    @Bean
+    public HttpMessageConverter<BufferedImage> createImageHttpMessageConverter() {
+        return new BufferedImageHttpMessageConverter();
+    }
 
     @GetMapping("/find-purchases-by-customer")
     @PreAuthorize("hasRole('ROLE_CUSTOMER')")
@@ -50,51 +51,31 @@ public class BankSlipController {
         return new ResponseEntity<>(bankSlipService.getBankSlip(orderId), HttpStatus.OK);
     }
 
-//    @GetMapping("/barcode")
-//    public ResponseEntity<BufferedImage> getBarcode(@RequestParam String barcode) throws Exception {
-//        return new ResponseEntity<>(bankSlipService.generateEAN13BarcodeImage(barcode), HttpStatus.OK);
-//    }
 
-    @GetMapping("/barcode")
-    public ResponseEntity<String> getBarcode(@RequestParam String barcode) throws Exception {
-        return new ResponseEntity<>(bankSlipService.generateBarcodeB64String(barcode), HttpStatus.OK);
+    @PreAuthorize("hasRole('ROLE_CUSTOMER')")
+    @GetMapping(value = "/generate-barcode", produces = MediaType.IMAGE_PNG_VALUE)
+    public ResponseEntity<BufferedImage> getBarcode(@RequestParam Long orderId) throws Exception {
+        return new ResponseEntity<>(bankSlipService.generateBarcodeB64(orderId), HttpStatus.OK);
     }
 
-    @Bean
-    public HttpMessageConverter<BufferedImage> createImageHttpMessageConverter() {
-        return new BufferedImageHttpMessageConverter();
+
+    @PreAuthorize("hasRole('ROLE_CUSTOMER')")
+    @GetMapping(value = "/generate-qrcode", produces = MediaType.IMAGE_PNG_VALUE)
+    public ResponseEntity<BufferedImage> getQRcode(@RequestParam Long orderId) throws Exception {
+        return new ResponseEntity<>(bankSlipService.generateQRcodeB64(orderId), HttpStatus.OK);
     }
+
 
     @GetMapping("/generate")
     @PreAuthorize("hasRole('ROLE_CUSTOMER')")
-    public ResponseEntity<byte[]> getPdf(@RequestParam Long orderId) throws Exception {
-
-//        BankSlipResult bankSlipResult = bankSlipService.getBankSlip(orderId);
+    public ResponseEntity<byte[]> getBankSlipPdf(@RequestParam Long orderId) throws Exception {
 
         byte[] pdfBytes = bankSlipService.generateBankSlipPdf(orderId);
-//        InputStream targetStream = new ByteArrayInputStream(pdfBytes);
-
-//        File file = new File(fileName);
-//        FileUtils.writeByteArrayToFile(file, pdfBytes); //org.apache.commons.io.FileUtils
-//        InputStreamResource resource = new InputStreamResource(targetStream);
-        MediaType mediaType = MediaType.parseMediaType("application/pdf");
 
         HttpHeaders headers = new HttpHeaders();
-//        headers.add("content-disposition", "attachment; filename=" + "XXX.pdf");
         headers.setContentType(MediaType.parseMediaType("application/pdf"));
-        headers.add("content-disposition", "inline;filename=" + "XXX.pdf");
+        headers.add("content-disposition", "inline;filename=" + boletoName);
 
-
-//        return ResponseEntity.ok()
-//                // Content-Disposition
-//                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=" + "XXX.pdf")
-//                // Content-Type
-//                .contentType(mediaType)
-//                // Contet-Length
-////                .contentLength(file.length()) //length
-//                .body(resource);
-
-        return new ResponseEntity<>(
-                pdfBytes, headers, HttpStatus.OK);
+        return new ResponseEntity<>(pdfBytes, headers, HttpStatus.OK);
     }
 }
