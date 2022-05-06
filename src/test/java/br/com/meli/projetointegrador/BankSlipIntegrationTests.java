@@ -361,6 +361,10 @@ public class BankSlipIntegrationTests {
         String allPurchases_3 = getBankSlipByOrder(2L, status().isOk(), CUSTOMER_2_JWT);
         BankSlipResultImpl bankSlipResult_3 = objectMapper.readValue(allPurchases_3, new TypeReference<>() {});
 
+        getBankSlipByOrder(2L, status().isNotFound(), CUSTOMER_JWT);
+        getBankSlipByOrder(1L, status().isNotFound(), CUSTOMER_2_JWT);
+        getBankSlipByOrder(1L, status().isNotFound(), CUSTOMER_3_JWT);
+
         assertAll(
                 () -> assertEquals("customertest", bankSlipResult_1.getName()),
                 () -> assertEquals(210.0, bankSlipResult_1.getTotal()),

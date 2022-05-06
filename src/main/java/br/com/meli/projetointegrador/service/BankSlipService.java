@@ -37,9 +37,17 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Base64;
 import java.util.List;
 import java.time.temporal.ChronoUnit;
+
+/**
+ * Classe de serviço responsável por processar dados de Boleto(Bank Slip).
+ * Possui funções auxiliares para editar um template html para geração de PDF,
+ * gera PDF e imagens com códigos de barra e QRCode.
+ * @author Jeferson Barbosa Sousa
+ * */
 
 @Service
 @AllArgsConstructor
@@ -73,17 +81,19 @@ public class BankSlipService {
 
     public BankSlipResult getBankSlip(Long orderId) {
 
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        UserDetailsImpl userDetails = (UserDetailsImpl) auth.getPrincipal();
+        String email = userDetails.getEmail();
+
         getPurchasedCartsByCustomer();
 
         BankSlip bankSlip;
-        bankSlip = bankSlipRepository.findByOrderStatus_Id(orderId).orElse(new BankSlip());
+        bankSlip = bankSlipRepository.findByOrderStatus_IdAndEmailEquals(orderId, email).orElse(new BankSlip());
         if (bankSlip.getId() != null) {
             return new BankSlipResultImpl(bankSlip.getTotal(), bankSlip.getDate(), bankSlip.getName(),
                     bankSlip.getEmail(), bankSlip.getCpf());
         }
 
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        UserDetailsImpl userDetails = (UserDetailsImpl) auth.getPrincipal();
         Long userId = userDetails.getId();
 
         Customer customer = customerRepository.findCustomerByUser_Id(userId).orElse(new Customer());
@@ -208,6 +218,14 @@ public class BankSlipService {
         replaceHtmlInputs(doc, "div#buyerName", bankSlipResult.getName());
         replaceHtmlInputs(doc, "div#buyerCpfCnpj", bankSlipResult.getCpf());
         replaceHtmlInputs(doc, "div#buyerEmail", bankSlipResult.getEmail());
+
+        LocalDate date = LocalDate.parse(bankSlipResult.getDate());
+        DateTimeFormatter formatters = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String dateFormatted = date.format(formatters);
+
+        replaceHtmlInputs(doc, "p#bankSlipDueDate", dateFormatted);
+        replaceHtmlInputs(doc, "p#bankSlipDate", dateFormatted);
+        replaceHtmlInputs(doc, "p#bankSlipProcessingDate", dateFormatted);
 
         doc.outputSettings().syntax(Document.OutputSettings.Syntax.xml);
         return doc;

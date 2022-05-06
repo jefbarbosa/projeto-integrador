@@ -8,6 +8,12 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
+/**
+ * Classe de com modelo de informações básicas de Bank Slip(Boleto),
+ * baseada em informações do usuário relacionado ao Customer no banco de dados
+ * @author Jeferson Barbosa Sousa
+ * */
+
 @Getter
 @Setter
 @NoArgsConstructor
