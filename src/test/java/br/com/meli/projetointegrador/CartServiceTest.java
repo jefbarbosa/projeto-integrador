@@ -2,18 +2,23 @@ package br.com.meli.projetointegrador;
 
 import br.com.meli.projetointegrador.model.*;
 import br.com.meli.projetointegrador.repository.CartRepository;
+import br.com.meli.projetointegrador.security.services.UserDetailsImpl;
 import br.com.meli.projetointegrador.service.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -45,6 +50,15 @@ public class CartServiceTest {
         this.cartService = new CartServiceImpl(cartRepository, productService, batchService, itemService, customerService, orderStatusService);
     }
 
+    private void initializeAuthentication(){
+        Authentication authentication = Mockito.mock(Authentication.class);
+        SecurityContext securityContext = Mockito.mock(SecurityContext.class);
+
+        Mockito.when(securityContext.getAuthentication()).thenReturn(authentication);
+        Mockito.when((UserDetailsImpl) authentication.getPrincipal()).thenReturn(UserDetailsImpl.build(new User(1L, "Igor", "123.456.789-10", "igor@gmail.com", "igor_sn", "abcd1234", Set.of(new Role(1, ERole.ROLE_STOCK_MANAGER)))));
+        SecurityContextHolder.setContext(securityContext);
+    }
+
     @Test
     public void findByIdTest() {
         Cart cart = new Cart(1L, LocalDate.of(2022, 1, 1), new Customer(), BigDecimal.valueOf(200), new OrderStatus(), Arrays.asList(new Item(), new Item()));
@@ -57,6 +71,8 @@ public class CartServiceTest {
 
     @Test
     public void saveTest() {
+
+        initializeAuthentication();
 
         Product product = new Product(1L, "Produto 1", 100.0, 2.0, 2.0, Arrays.asList(new Batch(), new Batch()));
         Advertisement advertisement = new Advertisement(1L, "Advertisement 1", BigDecimal.valueOf(100), product, new Seller());
