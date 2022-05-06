@@ -23,6 +23,12 @@ import java.awt.image.BufferedImage;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Classe controladora responsável por lidar com a geração de boletos(Bank Slips).
+ * Possui rotas listar as ordens de compra por comprador(autenticado) e geração de boletos em PDF,
+ * códigos de barras e QRCodes
+ * @author Jeferson Barbosa Sousa
+ * */
 @RestController
 @RequestMapping("/api/v1/fresh-products/bank-slip")
 public class BankSlipController {

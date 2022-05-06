@@ -42,6 +42,13 @@ import java.util.Base64;
 import java.util.List;
 import java.time.temporal.ChronoUnit;
 
+/**
+ * Classe de serviço responsável por processar dados de Boleto(Bank Slip).
+ * Possui funções auxiliares para editar um template html para geração de PDF,
+ * gera PDF e imagens com códigos de barra e QRCode.
+ * @author Jeferson Barbosa Sousa
+ * */
+
 @Service
 @AllArgsConstructor
 public class BankSlipService {
