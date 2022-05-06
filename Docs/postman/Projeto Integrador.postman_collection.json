@@ -16,7 +16,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzdG9ja21hbmFnZXJ0ZXN0IiwiaWF0IjoxNjUxNjA2MDY5LCJleHAiOjE2NTE2OTI0Njl9.uvnrjBq2JC8KvGaX4Nlng0idZ--mwtr7iOBZ2GC9F0VW503pD0H8-sUzrib6XEoTNk01kNi8hZ1yWBvjuHjcWQ",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzdG9ja21hbmFnZXJ0ZXN0IiwiaWF0IjoxNjUxODYyMjc5LCJleHAiOjE2NTE5NDg2Nzl9.ZrArRuy8hS_PZKDTmj4-S-VSdNT-ZpCzKBA5hjb8I-hksvSzYodr2lgyC8RdmwHn28qWmykVKhVXlFy1PfeueQ",
 									"type": "string"
 								}
 							]
@@ -25,7 +25,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"orderNumber\": 2,\n    \"orderDate\": \"2020-01-05\",\n    \"section\": {\n        \"sectionCode\": 1,\n        \"warehouseCode\": 1\n    },\n    \"batchStock\": [\n        {\n            \"productId\": 1,\n            \"currentTemperature\": -1,\n            \"minTemperature\": -10,\n            \"initialQuantity\": 20,\n            \"currentQuantity\": 20,\n            \"manufacturingDate\": \"2022-10-10\",\n            \"manufacturingTime\": \"2022-10-10T00:00:00\",\n            \"expirationDate\": \"2022-10-10\"\n        },\n        {\n            \"productId\": 2,\n            \"currentTemperature\": -5,\n            \"minTemperature\": -10,\n            \"initialQuantity\": 20,\n            \"currentQuantity\": 20,\n            \"manufacturingDate\": \"2022-10-10\",\n            \"manufacturingTime\": \"2022-10-10T00:00:00\",\n            \"expirationDate\": \"2022-10-10\"\n        }\n    ]\n}",
+							"raw": "{\n    \"orderNumber\": 2,\n    \"orderDate\": \"2022-05-06\",\n    \"section\": {\n        \"sectionCode\": 1,\n        \"warehouseCode\": 1\n    },\n    \"batchStock\": [\n        {\n            \"productId\": 1,\n            \"currentTemperature\": -1,\n            \"minTemperature\": -10,\n            \"initialQuantity\": 60,\n            \"currentQuantity\": 60,\n            \"manufacturingDate\": \"2022-10-10\",\n            \"manufacturingTime\": \"2022-10-10T00:00:00\",\n            \"expirationDate\": \"2022-10-10\"\n        },\n        {\n            \"productId\": 2,\n            \"currentTemperature\": -5,\n            \"minTemperature\": -10,\n            \"initialQuantity\": 60,\n            \"currentQuantity\": 60,\n            \"manufacturingDate\": \"2022-10-10\",\n            \"manufacturingTime\": \"2022-10-10T00:00:00\",\n            \"expirationDate\": \"2022-10-10\"\n        }\n    ]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -93,7 +93,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjdXN0b21lcnRlc3QiLCJpYXQiOjE2NTE2MDYwMDEsImV4cCI6MTY1MTY5MjQwMX0.7wStt6WGPRabEBF4C97b9NOz6q0EenJOA4lFPEKbS0NxFI6e0Hl5Rp19ONX1P8PyndzPqy27N33NUfQyz9GN9Q",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjdXN0b21lcnRlc3QiLCJpYXQiOjE2NTE4NTY2ODcsImV4cCI6MTY1MTk0MzA4N30.jUsFvGdDC-Vjxoqhy0TsVP6q1Oe8ORS6tlsJPhEt41b0y0FRFHwNsP2V237sI_X3JwlEco_BvzsbezVAaKusug",
 									"type": "string"
 								}
 							]
@@ -102,7 +102,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"orderDate\": \"2022-02-02\",\n    \"customerId\": 1,\n    \"orderStatus\": {\n        \"statusCode\": \"CART\"\n    },\n    \"items\": [\n        {\n            \"advertisementId\": 1,\n            \"quantity\": 2\n        },\n        {\n            \"advertisementId\": 2,\n            \"quantity\": 5\n        }\n    ]\n}",
+							"raw": "{\n    \"orderDate\": \"2022-05-06\",\n    \"customerId\": 1,\n    \"orderStatus\": {\n        \"statusCode\": \"CART\"\n    },\n    \"items\": [\n        {\n            \"advertisementId\": 1,\n            \"quantity\": 2\n        },\n        {\n            \"advertisementId\": 2,\n            \"quantity\": 5\n        }\n    ]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -157,7 +157,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjdXN0b21lcnRlc3QiLCJpYXQiOjE2NTE2MDYwMDEsImV4cCI6MTY1MTY5MjQwMX0.7wStt6WGPRabEBF4C97b9NOz6q0EenJOA4lFPEKbS0NxFI6e0Hl5Rp19ONX1P8PyndzPqy27N33NUfQyz9GN9Q",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjdXN0b21lcnRlc3QiLCJpYXQiOjE2NTE4NTY2ODcsImV4cCI6MTY1MTk0MzA4N30.jUsFvGdDC-Vjxoqhy0TsVP6q1Oe8ORS6tlsJPhEt41b0y0FRFHwNsP2V237sI_X3JwlEco_BvzsbezVAaKusug",
 									"type": "string"
 								}
 							]
@@ -216,6 +216,32 @@
 						"body": {
 							"mode": "raw",
 							"raw": "{\n    \"name\" : \"customertest\",\n    \"username\" : \"customertest\",\n    \"email\" : \"customertest@teste.com.br\",\n    \"cpf\" : \"000-000-000-03\",\n    \"password\" : \"abcd1234\",\n    \"role\" : [\"customer\"]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{$authUrl}}/signup",
+							"host": [
+								"{{$authUrl}}"
+							],
+							"path": [
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Signup Customer_2",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\" : \"ctest\",\n    \"username\" : \"ctest\",\n    \"email\" : \"ctest@teste.com.br\",\n    \"cpf\" : \"000-000-000-04\",\n    \"password\" : \"abcd1234\",\n    \"role\" : [\"customer\"]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -294,6 +320,32 @@
 						"body": {
 							"mode": "raw",
 							"raw": "{\n    \"username\" : \"customertest\",\n    \"password\" : \"abcd1234\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{$authUrl}}/signin",
+							"host": [
+								"{{$authUrl}}"
+							],
+							"path": [
+								"signin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Signin Customer_2",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\" : \"ctest\",\n    \"password\" : \"abcd1234\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -549,7 +601,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzdG9ja21hbmFnZXJ0ZXN0IiwiaWF0IjoxNjUxNTkzOTIwLCJleHAiOjE2NTE2ODAzMjB9.B4KIelctp9cb7EhNIHs6xYl0TpF9GIFAtngeGeXcr2Hzgl1MUUf-BvjQ4IXT7_QzGMCEwetoYwn-4ez_olOCDA",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzdG9ja21hbmFnZXJ0ZXN0IiwiaWF0IjoxNjUxODYyMjc5LCJleHAiOjE2NTE5NDg2Nzl9.ZrArRuy8hS_PZKDTmj4-S-VSdNT-ZpCzKBA5hjb8I-hksvSzYodr2lgyC8RdmwHn28qWmykVKhVXlFy1PfeueQ",
 									"type": "string"
 								}
 							]
@@ -568,6 +620,209 @@
 								{
 									"key": "productId",
 									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Bank Slip",
+			"item": [
+				{
+					"name": "Bank Slip By order id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjdXN0b21lcnRlc3QiLCJpYXQiOjE2NTE4NjIyNDUsImV4cCI6MTY1MTk0ODY0NX0.5T8eI5q30A2_FQwQr0HIL7ou44ty3KveiTMOwvhc-lVUeONnf1wT4nkdWEsJ_nZxiu5E2Jp01KFo0SpGG525Kw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{$baseUrl}}/bank-slip/find-by-order?orderId=1",
+							"host": [
+								"{{$baseUrl}}"
+							],
+							"path": [
+								"bank-slip",
+								"find-by-order"
+							],
+							"query": [
+								{
+									"key": "orderId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PDF Bank Slip By order id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjdXN0b21lcnRlc3QiLCJpYXQiOjE2NTE4NjIyNDUsImV4cCI6MTY1MTk0ODY0NX0.5T8eI5q30A2_FQwQr0HIL7ou44ty3KveiTMOwvhc-lVUeONnf1wT4nkdWEsJ_nZxiu5E2Jp01KFo0SpGG525Kw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{$baseUrl}}/bank-slip/generate?orderId=1",
+							"host": [
+								"{{$baseUrl}}"
+							],
+							"path": [
+								"bank-slip",
+								"generate"
+							],
+							"query": [
+								{
+									"key": "orderId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Orders By Customer",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjdGVzdCIsImlhdCI6MTY1MTg2MjI2NCwiZXhwIjoxNjUxOTQ4NjY0fQ.304qADYROTi6nFrwGqaHh-R5YcmMDBAEPlxNCbYl41BNok0OjdNuTDRVzfvN4DqzgbI6ZZh8GNg4QX1kWY-A1w",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{$baseUrl}}/bank-slip/find-purchases-by-customer",
+							"host": [
+								"{{$baseUrl}}"
+							],
+							"path": [
+								"bank-slip",
+								"find-purchases-by-customer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get barcode",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjdGVzdCIsImlhdCI6MTY1MTg2MDg5NCwiZXhwIjoxNjUxOTQ3Mjk0fQ.s9ez-G6s_ht4hv4pBd1nYE2532xQZ5OTg9RQ6DjqgZrQlc0PeI0tYhLlPkQKqbr6zIBpV6i2xbmXuNSPd1dmhw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{$baseUrl}}/bank-slip/generate-barcode?orderId=3",
+							"host": [
+								"{{$baseUrl}}"
+							],
+							"path": [
+								"bank-slip",
+								"generate-barcode"
+							],
+							"query": [
+								{
+									"key": "orderId",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get qrcode",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjdXN0b21lcnRlc3QiLCJpYXQiOjE2NTE4NjIyNDUsImV4cCI6MTY1MTk0ODY0NX0.5T8eI5q30A2_FQwQr0HIL7ou44ty3KveiTMOwvhc-lVUeONnf1wT4nkdWEsJ_nZxiu5E2Jp01KFo0SpGG525Kw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{$baseUrl}}/bank-slip/generate-qrcode?orderId=1",
+							"host": [
+								"{{$baseUrl}}"
+							],
+							"path": [
+								"bank-slip",
+								"generate-qrcode"
+							],
+							"query": [
+								{
+									"key": "orderId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get qrcode 2",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjdGVzdCIsImlhdCI6MTY1MTg1NzExNywiZXhwIjoxNjUxOTQzNTE3fQ.h5PfkkGhqV9aOR_HwjEMhnGNGElKyXhOlFExBDHjHVahgkQ6aIo2J3NkLaxn46cRGAbKTYLe6Cijh8ZH7wt0cQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{$baseUrl}}/bank-slip/generate-qrcode?orderId=3",
+							"host": [
+								"{{$baseUrl}}"
+							],
+							"path": [
+								"bank-slip",
+								"generate-qrcode"
+							],
+							"query": [
+								{
+									"key": "orderId",
+									"value": "3"
 								}
 							]
 						}
