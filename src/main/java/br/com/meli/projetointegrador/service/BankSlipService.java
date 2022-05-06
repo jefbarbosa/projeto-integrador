@@ -215,6 +215,7 @@ public class BankSlipService {
 
         replaceHtmlInputs(doc, "span#bankSlipCode", bankSlipCode);
         replaceHtmlInputs(doc, "p#totalValueDocument", bankSlipResult.getTotal().toString());
+        replaceHtmlInputs(doc, "p#totalValue", bankSlipResult.getTotal().toString());
         replaceHtmlInputs(doc, "div#buyerName", bankSlipResult.getName());
         replaceHtmlInputs(doc, "div#buyerCpfCnpj", bankSlipResult.getCpf());
         replaceHtmlInputs(doc, "div#buyerEmail", bankSlipResult.getEmail());
